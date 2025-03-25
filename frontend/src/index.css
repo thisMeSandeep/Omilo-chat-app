@@ -16,7 +16,7 @@
   --color-omilo-light-bg: #f8fafc;
   --color-omilo-primary: #2a66ff;
   --color-omilo-text-primary: #0f1729;
-  --color-omilo-text-secondary: #d8dce2;
+  --color-omilo-text-secondary:#65758B;
   --color-omilo-dark-bg: #0f1729;
   --color-omilo-dark-text-secondary: #8493a7;
 }
@@ -27,9 +27,9 @@
   .bg-omilo-light {
     background-color: var(--color-omilo-light-bg);
   }
-  .text-omilo-primary {
+  /* .text-omilo-primary {
     color: var(--color-omilo-text-primary);
-  }
+  } */
   .text-omilo-secondary {
     color: var(--color-omilo-text-secondary);
   }
