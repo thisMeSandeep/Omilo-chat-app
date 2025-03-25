@@ -1,12 +1,25 @@
 import React from 'react'
+import { Routes, Route } from "react-router-dom"
+import { Toaster } from "react-hot-toast"
+import Home from './pages/Home'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+import Dashboard from './pages/Dashboard'
 
 const App = () => {
   return (
-    <div className='h-screen bg-gray-50'>
-      <h1 className='text-5xl font-medium text-indigo-600 '>Heading</h1>
-      <h3></h3>
-      <p></p>
-    </div>
+    <>
+      <Toaster />
+
+      {/* routes */}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='dashboard' element={<Dashboard />} />
+      </Routes>
+
+    </>
   )
 }
 
