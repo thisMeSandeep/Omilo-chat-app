@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import ThemeToggler from "./ui/ThemeToggler"
 import { useEffect, useState } from "react"
 
-const Navbar = () => {
+const NavbarMini = () => {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -33,15 +33,6 @@ const Navbar = () => {
 
                     <ThemeToggler />
 
-                    <Link to='/login' className="hidden md:inline">
-                        <button className="cursor-pointer text-sm tracking-tight px-5 py-2.5 rounded-md hover:border hover:border-omilo-primary hover:text-omilo-primary">Sign In</button>
-                    </Link>
-
-                    <Link to='/signUp'>
-                        <button className="cursor-pointer text-sm tracking-tight px-5 py-2.5 rounded-md bg-omilo-primary text-white">Get Started</button>
-                    </Link>
-
-
                 </div>
 
 
@@ -50,4 +41,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default NavbarMini
