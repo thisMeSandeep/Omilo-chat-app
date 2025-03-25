@@ -1,4 +1,4 @@
-import chat from "./chat.svg";
+import chat from "../assets/chat.svg";
 import clock from "./clock.svg";
 import download from "./download.svg";
 import emoji from "./emoji.svg";
