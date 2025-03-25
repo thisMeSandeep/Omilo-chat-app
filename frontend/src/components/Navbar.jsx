@@ -20,7 +20,7 @@ const Navbar = () => {
 
 
     return (
-        <header className={`fixed top-0 left-0 right-0  py-4 md:py-6  dark:text-white border-b-[1px] border-gray-100 dark:border-white/10 ${scrolled?'backdrop-blur-lg':''}`}>
+        <header className={`fixed top-0 left-0 right-0 z-50 py-4 md:py-6  dark:text-white border-b-[1px] border-gray-100 dark:border-white/10 ${scrolled?'backdrop-blur-lg':''}`}>
             <nav className="w-[90%] mx-auto flex items-center justify-between">
                 {/* logo */}
                 <Link className='flex items-center gap-2'>
