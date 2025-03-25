@@ -41,7 +41,7 @@ const Hero = () => {
                     {/* Buttons */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 ">
                         <Link
-                            to="/signUp"
+                            to="/login"
                             className="flex items-center gap-2 bg-omilo-primary text-white rounded-md px-8 py-3 text-sm font-medium group cursor-pointer"
                         >
                             Get Started
