@@ -16,7 +16,7 @@
   --color-omilo-light-bg: #f8fafc;
   --color-omilo-primary: #2a66ff;
   --color-omilo-text-primary: #0f1729;
-  --color-omilo-text-secondary:#65758B;
+  --color-omilo-text-secondary: #65758b;
   --color-omilo-dark-bg: #0f1729;
   --color-omilo-dark-text-secondary: #8493a7;
 }
@@ -72,5 +72,15 @@
   }
   .scrollbar-none::-webkit-scrollbar {
     display: none;
+  }
+  .tooltip {
+    @apply bg-omilo-primary absolute -top-10 left-1/2 -translate-x-1/2 
+           text-white text-sm capitalize px-2 py-1 rounded-lg shadow-lg;
+  }
+
+  .tooltip::before {
+    content: "";
+    @apply absolute left-1/2 top-[80%] w-3 h-3 bg-omilo-primary;
+    transform: translateX(-50%) rotate(45deg);
   }
 }
