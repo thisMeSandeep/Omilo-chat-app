@@ -145,3 +145,23 @@ export const groups = [
     image: assets.user5,
   },
 ];
+
+export const user = {
+  username: "rimsonX",
+  email: "snayal50@gmail.com",
+  name: "Sandeep Singh Nayal",
+  profilePic: assets.user1,
+  gender: "male",
+  dob: {
+    date: "11/7/2003",
+    visible: true,
+  },
+  country: "India",
+  bio: "If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual.",
+  lastSeen: {
+    date: "7:35 Pm",
+    visible: "true",
+  },
+  status: "active",
+  privateAccount: false,
+};
