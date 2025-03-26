@@ -37,7 +37,7 @@ const Navbar = () => {
                     <ThemeToggler />
 
                     <Link to='/login' className="hidden md:inline">
-                        <button className="cursor-pointer text-sm tracking-tight px-5 py-2.5 rounded-md hover:border hover:border-omilo-primary hover:text-omilo-primary">Sign In</button>
+                        <button className="cursor-pointer text-sm tracking-tight px-5 py-2.5 rounded-md hover:border hover:border-omilo-primary text-omilo-text-secondary dark:text-omilo-dark-text-secondary hover:text-omilo-primary">Sign In</button>
                     </Link>
 
                     <Link to='/dashboard'><LayoutDashboard className="size-5"/></Link>
