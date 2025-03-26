@@ -32,7 +32,7 @@ const Navbar = () => {
                 </Link>
 
                 {/* action button */}
-                <div className="flex items-center gap-10">
+                <div className="flex items-center gap-5 md:gap-10">
 
                     <ThemeToggler />
 
@@ -43,7 +43,7 @@ const Navbar = () => {
                     <Link to='/dashboard'><LayoutDashboard className="size-5"/></Link>
 
                     <Link to='/signUp'>
-                        <button className="cursor-pointer text-sm tracking-tight px-5 py-2.5 rounded-md bg-omilo-primary text-white">Get Started</button>
+                        <button className="cursor-pointer text-sm tracking-tight px-5 py-2.5 rounded-md bg-omilo-primary text-white text-nowrap">Get Started</button>
                     </Link>
 
 
