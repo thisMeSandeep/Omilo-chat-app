@@ -21,7 +21,7 @@ const Chat = () => {
       <p className="mt-5 text-omilo-text-secondary dark:text-omilo-dark-text-secondary text-lg">Recent</p>
 
       {/* users */}
-      <div className=" h-screen mt-5 overflow-y-scroll scrollbar-none space-y-5">
+      <div className=" h-[500px]  pb-20 mt-5 overflow-y-scroll scrollbar-none space-y-5">
 
         {homeScreenProfiles.map((item) => (
           <button key={item.id} className="w-full flex items-center gap-5  rounded-md px-2 py-3 hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer">
@@ -29,7 +29,7 @@ const Chat = () => {
             <div className="size-10 rounded-full relative">
               <img src={item.image} alt="user" className="size-full rounded-full object-cover" />
               {item.online && <div className="size-3 absolute rounded-full bg-white p-[1px] -right-0.5 bottom-0 flex items-center justify-center ">
-                <div className="size-2 rounded-full bg-green-500"/>
+                <div className="size-2 rounded-full bg-green-500" />
               </div>}
             </div>
             {/* text content */}
