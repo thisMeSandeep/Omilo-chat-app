@@ -6,6 +6,7 @@ import Profile from "./Profile";
 import Setting from "./Setting";
 import { assets } from "../assets/assets";
 import { useState } from "react";
+import ThemeToggler from "./ui/ThemeToggler";
 
 // Tabs 
 const tabs = [
@@ -25,7 +26,7 @@ const Sidebar = () => {
     return (
         <div className="flex">
             {/* Left Sidebar */}
-            <div className="w-[20%] h-screen border-r border-r-black/10 dark:border-r-white/10 overflow-y-scroll scrollbar-none">
+            <div className="w-[20%]  h-screen border-r border-r-black/10 dark:border-r-white/10 overflow-y-scroll scrollbar-none">
                 {/* Logo */}
                 <div className="border-b border-b-black/10 dark:border-b-white/10 flex items-center justify-center py-4">
                     <div className="size-8 rounded-full bg-omilo-primary flex items-center justify-center p-1">
@@ -34,7 +35,7 @@ const Sidebar = () => {
                 </div>
 
                 {/* Navigation Tabs */}
-                <nav className="mt-10 flex flex-col items-center justify-center gap-15">
+                <nav className="mt-10 px-4 flex flex-col items-center justify-center gap-15">
                     {tabs.map(tab => (
                         <div
                             key={tab.key}
@@ -50,8 +51,13 @@ const Sidebar = () => {
                     ))}
                 </nav>
 
+                {/* theme toggler */}
+                <div className="flex items-center justify-center mt-10">
+                    <ThemeToggler />
+                </div>
+
                 {/* User Profile */}
-                <div className="flex items-center justify-center mt-20">
+                <div className="flex items-center justify-center mt-5">
                     <div className="size-8 rounded-full">
                         <img src={assets.user1} alt="user" className="w-full h-full rounded-full object-cover" />
                     </div>
