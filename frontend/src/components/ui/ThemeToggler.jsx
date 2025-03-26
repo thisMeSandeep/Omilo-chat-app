@@ -7,7 +7,7 @@ const ThemeToggler = () => {
 
     return (
         <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className={`cursor-pointer ${theme === 'light' ? 'hover:bg-gray-200 ' : ''}  rounded-full p-3`}>
-            {theme === "light" ? <Moon className='size-6' /> : <Sun className='size-6 text-yellow-400' />}
+            {theme === "light" ? <Moon className='size-5' /> : <Sun className='size-5 text-yellow-400' />}
         </button>
     );
 };
