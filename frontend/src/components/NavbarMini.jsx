@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import ThemeToggler from "./ui/ThemeToggler"
 import { useEffect, useState } from "react"
+import { MessageCircleDashed } from "lucide-react";
 
 const NavbarMini = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -24,7 +25,9 @@ const NavbarMini = () => {
             <nav className="w-[90%] mx-auto flex items-center justify-between">
                 {/* logo */}
                 <Link to="/" className='flex items-center gap-2'>
-                    <div className='size-8 rounded-full bg-omilo-primary'></div>
+                    <div className='size-8 rounded-full bg-omilo-primary flex items-center justify-center p-1'>
+                        <MessageCircleDashed className="size-5 text-white" />
+                    </div>
                     <span className="text-2xl font-bold logo text-glow">Omilo</span>
                 </Link>
 
