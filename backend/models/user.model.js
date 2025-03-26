@@ -80,6 +80,10 @@ const userSchema = new mongoose.Schema(
       enum: ["active", "inactive", "banned"],
       default: "active",
     },
+    privateAccount: {
+      type: Boolean,
+      default: false,
+    },
     friends: [
       {
         type: String,
