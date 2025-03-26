@@ -122,3 +122,26 @@ export const homeScreenProfiles = [
     online: true,
   },
 ];
+
+export const groups = [
+  {
+    name: "coding",
+    image: assets.user1,
+  },
+  {
+    name: "College",
+    image: assets.user2,
+  },
+  {
+    name: "studio",
+    image: assets.user3,
+  },
+  {
+    name: "football",
+    image: assets.user4,
+  },
+  {
+    name: "coding-books",
+    image: assets.user5,
+  },
+];
