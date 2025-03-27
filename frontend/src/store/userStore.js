@@ -26,7 +26,7 @@ const useUserStore = create((set) => ({
       });
       return false;
     } finally {
-      set({ loading: false });
+      set({ loading: false});
     }
   },
 

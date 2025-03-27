@@ -20,7 +20,6 @@ const Login = () => {
       email,
       password
     };
-    console.log(formData)
     try {
       const isSuccess = await loginUser(formData);
       if (isSuccess) {

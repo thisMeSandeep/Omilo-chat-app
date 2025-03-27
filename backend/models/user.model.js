@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: "default-profile-pic-url",
+      default: "https://cdn-icons-png.flaticon.com/512/10337/10337609.png",
       trim: true,
     },
     gender: {

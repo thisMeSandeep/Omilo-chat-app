@@ -7,6 +7,7 @@ import Setting from "./Setting";
 import { assets } from "../assets/assets";
 import { useState } from "react";
 import ThemeToggler from "./ui/ThemeToggler";
+import useUserStore from "../store/userStore";
 
 // Tabs 
 const tabs = [
@@ -19,6 +20,9 @@ const tabs = [
 
 const Sidebar = () => {
     const [activeTab, setActiveTab] = useState("chats");
+
+    const user = useUserStore((state) => state.user);
+    console.log("user:", user)
 
     // Find the active component based on the selected tab
     const ActiveComponent = tabs.find(tab => tab.key === activeTab)?.component;
@@ -59,7 +63,7 @@ const Sidebar = () => {
                 {/* User Profile */}
                 <div className="flex items-center justify-center mt-5">
                     <div className="size-8 rounded-full">
-                        <img src={assets.user1} alt="user" className="w-full h-full rounded-full object-cover" />
+                        <img src={user.profilePic} alt="user" className="w-full h-full rounded-full object-cover" />
                     </div>
                 </div>
             </div>

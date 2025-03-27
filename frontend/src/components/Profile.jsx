@@ -1,10 +1,13 @@
 import { ChevronDown, User, UserCircle } from "lucide-react"
-import { user } from "../data/data"
+// import { user } from "../data/data"
 import { useState } from "react"
+import useUserStore from "../store/userStore";
 
 const Profile = () => {
 
-    const [dropdown, setDropdown] = useState(false)
+    const [dropdown, setDropdown] = useState(false);
+
+    const user = useUserStore((state) => state.user);
 
     return (
         <div>
@@ -70,11 +73,11 @@ const Profile = () => {
                         </div>
                         <div className="space-y-1">
                             <p className="text-omilo-text-secondary dark:text-omilo-dark-text-secondary">DOB</p>
-                            <p className="text-omilo-text-primary dark:text-white">{user.dob.date}</p>
+                            <p className="text-omilo-text-primary dark:text-white">{user.dob.date || 'Not Provided'}</p>
                         </div>
                         <div className="space-y-1">
                             <p className="text-omilo-text-secondary dark:text-omilo-dark-text-secondary">Location</p>
-                            <p className="text-omilo-text-primary dark:text-white capitalize">{user.country}</p>
+                            <p className="text-omilo-text-primary dark:text-white capitalize">{user.country || 'Not Provided'}</p>
                         </div>
                     </div>
                     {/* about details ends here */}
