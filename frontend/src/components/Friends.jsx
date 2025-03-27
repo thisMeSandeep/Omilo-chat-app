@@ -47,12 +47,12 @@ const Friends = () => {
 
       {/* Friends List */}
       <div className="h-[500px] mt-5 overflow-auto scrollbar-none space-y-5 px-4 pb-20">
-        {Object.keys(groupedNames).sort().map((letter) => (
+        {Object.keys(groupedNames).sort().map((letter ) => (
           <div key={letter}>
             <h1 className="text-omilo-primary font-semibold">{letter}</h1>
             <ul className="space-y-6 pl-4 mt-4">
-              {groupedNames[letter].sort().map((name) => (
-                <div key={name} className="flex items-center justify-between cursor-pointer relative">
+              {groupedNames[letter].sort().map((name,index) => (
+                <div key={index} className="flex items-center justify-between cursor-pointer relative">
                   <p className="text-omilo-text-primary dark:text-white text-sm tracking-tighter">{name}</p>
 
                   {/* Actions Dropdown */}

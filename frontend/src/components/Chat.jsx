@@ -23,8 +23,8 @@ const Chat = () => {
       {/* users */}
       <div className=" h-[500px]  pb-20 mt-5 overflow-y-scroll scrollbar-none space-y-5">
 
-        {homeScreenProfiles.map((item) => (
-          <button key={item.id} className="w-full flex items-center gap-5  rounded-md px-2 py-3 hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer">
+        {homeScreenProfiles.map((item ,index) => (
+          <button key={index} className="w-full flex items-center gap-5  rounded-md px-2 py-3 hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer">
             {/* image */}
             <div className="size-10 rounded-full relative">
               <img src={item.image} alt="user" className="size-full rounded-full object-cover" />
