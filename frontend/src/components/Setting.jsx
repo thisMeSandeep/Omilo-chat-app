@@ -1,4 +1,4 @@
-import { Check, ChevronDown, Pencil, Settings } from "lucide-react"
+import { Check, ChevronDown, Pencil, Settings, ToggleLeft, ToggleRight } from "lucide-react"
 import { useState } from "react";
 import { user } from "../data/data";
 import EditableField from "./ui/EditableField";
@@ -19,7 +19,8 @@ const Setting = () => {
   });
 
   const [isEdit, setIsEdit] = useState(false);
-  const [showDropDown, setShowDropdown] = useState(false)
+  const [showPersonalInfoDropDown, sethowPersonalInfoDropDown] = useState(false);
+  const [showPrivacyDropdown, setShowPrivacyDropdown] = useState(false)
 
 
   const handleSave = (e) => {
@@ -91,16 +92,16 @@ const Setting = () => {
         <div className="border border-black/10 dark:border-white/10 rounded-md">
           {/* Dropdown Menu */}
           <div
-            onClick={() => setShowDropdown((prev) => !prev)}
-            className="flex items-center justify-between text-omilo-text-primary dark:text-white rounded-t-md bg-gray-100 dark:bg-gray-800 p-4 cursor-pointer"
+            onClick={() => sethowPersonalInfoDropDown((prev) => !prev)}
+            className="flex items-center justify-between text-omilo-text-primary dark:text-white rounded-t-md bg-gray-100 dark:bg-gray-800 px-4 py-2 cursor-pointer"
           >
             <h3 className="font-medium tracking-tighter">Personal Information</h3>
-            <ChevronDown className={`size-4 transition-transform duration-300 ${showDropDown ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`size-4 transition-transform duration-300 ${showPersonalInfoDropDown ? 'rotate-180' : ''}`} />
           </div>
 
           {/* Dropdown Content */}
           <div
-            className={`transition-all duration-500 overflow-hidden ${showDropDown ? "max-h-[500px] py-4 px-4" : "max-h-0 p-0"}`}
+            className={`transition-all duration-500 overflow-hidden ${showPersonalInfoDropDown ? "max-h-[500px] py-4 px-4" : "max-h-0 p-0"}`}
           >
             {/* Name Edit */}
             <EditableField label="Name" type="text" value={formData.name} onSave={(val) => handleSave("name", val)} />
@@ -118,7 +119,52 @@ const Setting = () => {
         {/* personal information dropdown ends here */}
 
 
- 
+        {/* Details visibilty  dropdown*/}
+        <div className="border border-black/10 dark:border-white/10 rounded-md">
+          {/* Dropdown Menu */}
+          <div
+            onClick={() => setShowPrivacyDropdown((prev) => !prev)}
+            className="flex items-center justify-between text-omilo-text-primary dark:text-white rounded-t-md bg-gray-100 dark:bg-gray-800 px-4 py-2 cursor-pointer"
+          >
+            <h3 className="font-medium tracking-tighter">Privacy</h3>
+            <ChevronDown className={`size-4 transition-transform duration-300 ${showPrivacyDropdown ? 'rotate-180' : ''}`} />
+          </div>
+
+          {/* Dropdown Content */}
+          <div
+            className={`transition-all duration-500 overflow-hidden space-y-2 ${showPrivacyDropdown ? "max-h-[500px] py-4 px-4" : "max-h-0 p-0"}`}
+          >
+
+            {/* toogle DOB visibilty */}
+            <div className="flex items-center justify-between">
+              <p className="text-omilo-text-secondary dark:text-omilo-dark-text-secondary text-sm">Hide DOB</p>
+              <button className="cursor-pointer">
+                {user.dob ? <ToggleLeft className="size-6 text-red-500" /> : <ToggleRight className="size-6 green" />}
+              </button>
+            </div>
+
+            {/* toogle last seen visibilty */}
+            <div className="flex items-center justify-between">
+              <p className="text-omilo-text-secondary dark:text-omilo-dark-text-secondary text-sm">Hide Last Seen</p>
+              <button className="cursor-pointer">
+                {user.lastSeen.visible ? <ToggleLeft className="size-6 text-red-500" /> : <ToggleRight className="size-6 text-green-500" />}
+              </button>
+            </div>
+
+            {/* toogle Private Account*/}
+            <div className="flex items-center justify-between">
+              <p className="text-omilo-text-secondary dark:text-omilo-dark-text-secondary text-sm">Private Account</p>
+              <button className="cursor-pointer">
+                {user.privateAccount ? <ToggleLeft className="size-6 text-red-500" /> : <ToggleRight className="size-6 text-green-500" />}
+              </button>
+            </div>
+          </div>
+
+        </div>
+        {/* Details visibility dropdown dropdown ends here */}
+
+
+
 
 
       </div >
