@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema(
     dob: {
       date: {
         type: Date,
-        required: false,
+        default: null,
       },
       visible: {
         type: Boolean,

@@ -6,6 +6,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import connectDb from "./config/db.js";
+import userRouter from "./routes/user.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -16,9 +17,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
 
-app.get("/", (req, res) => {
-  res.send("I am active");
-});
+// user API
+app.use("/api/user", userRouter);
 
 // start server
 const runServer = async () => {

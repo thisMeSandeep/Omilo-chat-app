@@ -11,7 +11,7 @@ const generateToken = async (id, res) => {
     // Cookie options
     const options = {
       httpOnly: true,
-      sameSite: "strick",
+      sameSite: "strict",
       secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     };

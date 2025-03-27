@@ -1,64 +1,67 @@
+import User from "../models/user.model.js";
+import generateToken from "../config/generateToken.js";
+import bcrypt from "bcryptjs";
+
 // ---------------Register Controller--------------
 export const registerController = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { username, email, password } = req.body;
 
   try {
-    // Validate input
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
+    // Validate input fields
+    if (!username || !email || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required" });
     }
 
-    // Check if email already exists
-    const isEmailExists = await UserModel.findOne({ email });
+    // Check if email is already registered
+    const isEmailExists = await User.findOne({ email });
     if (isEmailExists) {
-      return res.status(400).json({
-        success: false,
-        message: "Email already exists",
-      });
+      return res
+        .status(400)
+        .json({ success: false, message: "Email already exists" });
     }
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // Check if username is already registered
+    const isUsernameExists = await User.findOne({ username: username });
+    if (isUsernameExists) {
+      return res
+        .status(400)
+        .json({ success: false, message: "username already exists" });
+    }
 
-    // Create user
-    const newUser = await UserModel.create({
-      name,
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create new user
+    const newUser = await User.create({
+      username,
       email,
       password: hashedPassword,
     });
 
-    // update last login
-    const date = new Date();
-    const lastLoginDate = date.toLocaleDateString();
-
-    await UserModel.findByIdAndUpdate(newUser._id, {
-      $set: { lastLoginDate: lastLoginDate },
+    // Update online status and name to username initially
+    await User.findByIdAndUpdate(newUser._id, {
+      $set: { online: true, name: newUser.username },
     });
 
-    // Generate JWT Token
+    // Fetch user  and exclude password
+    const user = await User.findById(newUser._id).select("-password");
+
+    // Generate jwt token
     await generateToken(newUser._id, res);
 
-    // Send response
+    // Send success
     return res.status(201).json({
       success: true,
       message: "Registration successful",
-      user: {
-        _id: newUser._id,
-        name: newUser.name,
-        email: newUser.email,
-        avatar: newUser.avatar,
-      },
+      user: user,
     });
   } catch (err) {
     console.error("Error in registration:", err.message);
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
   }
 };
 
@@ -75,7 +78,7 @@ export const loginController = async (req, res) => {
     }
 
     // Get user
-    const user = await UserModel.findOne({ email });
+    let user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({
@@ -93,13 +96,13 @@ export const loginController = async (req, res) => {
       });
     }
 
-    // update last login
-    const date = new Date();
-    const lastLoginDate = date.toLocaleDateString();
-
-    await UserModel.findByIdAndUpdate(user._id, {
-      $set: { lastLoginDate: lastLoginDate },
+    // Update online status and name to username initially
+    await User.findByIdAndUpdate(user._id, {
+      $set: { online: true, name: user.username },
     });
+
+    // Fetch user  and exclude password
+    user = await User.findById(user._id).select("-password");
 
     // Generate token and set in cookie
     await generateToken(user._id, res);
@@ -108,12 +111,7 @@ export const loginController = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Login successful",
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        avatar: user.avatar,
-      },
+      user: user,
     });
   } catch (err) {
     console.log("Error in login:", err.message);
@@ -130,7 +128,7 @@ export const logoutController = async (req, res) => {
     // Clear the token cookie
     res.clearCookie("token", {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "strict",
       secure: true,
     });
 
@@ -151,7 +149,7 @@ export const logoutController = async (req, res) => {
 export const getUserDataController = async (req, res) => {
   const userId = req.id;
   try {
-    const user = await UserModel.findById(userId);
+    const user = await User.findById(userId).select("-password");
     if (!user) {
       return res.status(404).json({
         success: false,
