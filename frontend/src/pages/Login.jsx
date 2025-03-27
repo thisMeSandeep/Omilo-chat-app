@@ -1,16 +1,34 @@
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
-import { Link } from "react-router-dom";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader, CircleX } from 'lucide-react';
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import NavbarMini from '../components/NavbarMini';
+import useUserStore from '../store/userStore';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const loading = useUserStore((state) => state.loading);
+  const message = useUserStore((state) => state.message);
+  const loginUser = useUserStore((state) => state.loginUser)
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ email, password });
+    const formData = {
+      email,
+      password
+    };
+    console.log(formData)
+    try {
+      const isSuccess = await loginUser(formData);
+      if (isSuccess) {
+        navigate('/dashboard')
+      }
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (
@@ -66,9 +84,16 @@ const Login = () => {
             </div>
           </div>
 
+          {/* Error message */}
+          {message && (
+            <p className="text-sm text-red-500 mt-2 text-center flex items-center justify-center gap-2">
+              <CircleX className="size-4" />{message}!
+            </p>
+          )}
+
           {/* button */}
           <button type='submit' className='flex items-center justify-center gap-2 w-full mt-8 rounded-md py-2 bg-omilo-primary text-white text-sm group'>
-            Sign in <ArrowRight className='size-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out' />
+            {loading ? <Loader className='size-5 animate-spin ' /> : <span className='flex items-center justify-center gap-2'> Sign in <ArrowRight className='size-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out' /></span>}
           </button>
 
           {/* sign up link */}

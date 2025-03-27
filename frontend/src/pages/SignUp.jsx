@@ -1,7 +1,9 @@
-import { Mail, Lock, Eye, EyeOff, ArrowRight, User } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, User, Loader, CircleX } from 'lucide-react';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import NavbarMini from '../components/NavbarMini';
+import useUserStore from '../store/userStore';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,11 +11,28 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [agreed, setAgreed] = useState(false);
+  const navigate = useNavigate();
 
- 
-  const handleSubmit = (e) => {
+
+  const loading = useUserStore((state) => state.loading);
+  const message = useUserStore((state) => state.message);
+  const registerUser = useUserStore((state) => state.registerUser)
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ username, email, password, agreed });
+    const formData = {
+      username,
+      email,
+      password
+    };
+    try {
+      const isSuccess = await registerUser(formData);
+      if (isSuccess) {
+        navigate('/dashboard')
+      }
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (
@@ -103,6 +122,13 @@ const SignUp = () => {
             </label>
           </div>
 
+          {/* Error message */}
+          {message && (
+            <p className="text-sm text-red-500 mt-2 text-center flex items-center justify-center gap-2">
+              <CircleX className="size-4" />{message}!
+            </p>
+          )}
+
           {/* button */}
           <button
             type='submit'
@@ -110,7 +136,7 @@ const SignUp = () => {
             className={`flex items-center justify-center gap-2 w-full mt-5 rounded-md py-2 text-white text-sm group 
               ${agreed ? "bg-omilo-primary" : "bg-gray-400 cursor-not-allowed"}`}
           >
-            Sign up <ArrowRight className='size-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out' />
+            {loading ? <Loader className='size-5 animate-spin ' /> : <span className='flex items-center justify-center gap-2'> Sign up <ArrowRight className='size-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out' /></span>}
           </button>
 
           {/* sign in link */}
