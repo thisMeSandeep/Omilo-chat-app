@@ -169,3 +169,30 @@ export const getUserDataController = async (req, res) => {
     });
   }
 };
+
+//--------------------update user details------------------
+export const updateUserController = async (req, res) => {
+  try {
+    const userId = req.id;
+    const updates = req.body;
+    const updatedUser = await User.findByIdAndUpdate(userId, updates, {
+      new: true,
+    }).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "update successful",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ success: false, message: "Internal server error." });
+  }
+};

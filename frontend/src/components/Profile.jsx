@@ -73,7 +73,7 @@ const Profile = () => {
                         </div>
                         <div className="space-y-1">
                             <p className="text-omilo-text-secondary dark:text-omilo-dark-text-secondary">DOB</p>
-                            <p className="text-omilo-text-primary dark:text-white">{user.dob.date || 'Not Provided'}</p>
+                            <p className="text-omilo-text-primary dark:text-white">{user.dob || 'Not Provided'}</p>
                         </div>
                         <div className="space-y-1">
                             <p className="text-omilo-text-secondary dark:text-omilo-dark-text-secondary">Location</p>

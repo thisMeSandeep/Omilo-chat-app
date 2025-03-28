@@ -41,14 +41,12 @@ const userSchema = new mongoose.Schema(
       default: "prefer-not-to-say",
     },
     dob: {
-      date: {
-        type: Date,
-        default: null,
-      },
-      visible: {
-        type: Boolean,
-        default: true,
-      },
+      type: Date,
+      default: null,
+    },
+    dobVisible: {
+      type: Boolean,
+      default: true,
     },
     country: {
       type: String,
@@ -66,14 +64,12 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     lastSeen: {
-      date: {
-        type: Date,
-        default: null,
-      },
-      visible: {
-        type: Boolean,
-        default: true,
-      },
+      type: Date,
+      default: null,
+    },
+    lastSeenVisible: {
+      type: Boolean,
+      default: true,
     },
     status: {
       type: String,
