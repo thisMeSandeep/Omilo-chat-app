@@ -26,7 +26,7 @@ const useUserStore = create((set) => ({
       });
       return false;
     } finally {
-      set({ loading: false});
+      set({ loading: false });
     }
   },
 
@@ -50,6 +50,36 @@ const useUserStore = create((set) => ({
       set({ loading: false });
     }
   },
+
+  // get user data
+  getUserData: async () => {
+    try {
+      const { data } = await axiosInstance.get("/user/get-user-data");
+      if (data.success) {
+        set({ user: data.user, message: null });
+        return true;
+      }
+    } catch (err) {
+      console.error("Error in getUserData:", err);
+      return false;
+    }
+  },
+
+  // Logout user
+  logoutUser: async () => {
+    try {
+      const { data } = await axiosInstance.post("/user/logout");
+      if (data.success) {
+        set({ user: null, message: null });
+        toast.success(data.message);
+        return true;
+      }
+    } catch (err) {
+      console.error("Error in logout:", err);
+      return false;
+    }
+  },
+
 }));
 
 export default useUserStore;

@@ -1,31 +1,41 @@
-import { MessageCircle, MessageCircleDashed, Settings, UserPlus, UserRoundPen, Users } from "lucide-react";
+import { LogOut, MessageCircle, MessageCircleDashed, Settings, User2, UserPlus, Users } from "lucide-react";
 import Chat from "./Chat";
 import Friends from "./Friends";
 import Group from "./Group";
 import Profile from "./Profile";
 import Setting from "./Setting";
-import { assets } from "../assets/assets";
 import { useState } from "react";
 import ThemeToggler from "./ui/ThemeToggler";
 import useUserStore from "../store/userStore";
+import { useNavigate } from "react-router-dom";
 
 // Tabs 
 const tabs = [
     { key: "chats", icon: MessageCircle, component: Chat },
     { key: "friends", icon: UserPlus, component: Friends },
     { key: "group", icon: Users, component: Group },
-    { key: "profile", icon: UserRoundPen, component: Profile },
+    { key: "profile", icon: User2, component: Profile },
     { key: "setting", icon: Settings, component: Setting },
 ];
 
 const Sidebar = () => {
     const [activeTab, setActiveTab] = useState("chats");
+    const [showLogout, setShowLogout] = useState(false);
+    const navigate = useNavigate();
 
     const user = useUserStore((state) => state.user);
-    console.log("user:", user)
+    const logoutUser = useUserStore((state) => state.logoutUser);
 
     // Find the active component based on the selected tab
     const ActiveComponent = tabs.find(tab => tab.key === activeTab)?.component;
+
+    // logout user
+    const logout = () => {
+        const res = logoutUser();
+        if (res) {
+            navigate('/')
+        }
+    }
 
     return (
         <div className="flex">
@@ -61,16 +71,18 @@ const Sidebar = () => {
                 </div>
 
                 {/* User Profile */}
-                <div className="flex items-center justify-center mt-5">
-                    <div className="size-8 rounded-full">
-                        <img src={user.profilePic} alt="user" className="w-full h-full rounded-full object-cover" />
+                <div className="flex items-center justify-center mt-5 relative cursor-pointer">
+                    <div onClick={() => setShowLogout(prev => !prev)} className="size-8 rounded-full">
+                        <img src={user?.profilePic} alt="user" className="w-full h-full rounded-full object-cover" />
                     </div>
+                    {/* logout */}
+                    <button onClick={logout} className={`${showLogout ? 'flex' : 'hidden'}  absolute cursor-pointer  -top-15 p-4 z-100 border border-black/10 dark:border-white/10 bg-white dark:bg-gray-800 shadow-lg  items-center gap-2 rounded-full`}><LogOut className="size-4 text-omilo-primary" /></button>
                 </div>
             </div>
 
             {/* Right Panel - Render Active Component */}
             <div className="p-4 w-full">{ActiveComponent && <ActiveComponent />}</div>
-        </div>
+        </div >
     );
 };
 

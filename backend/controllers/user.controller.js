@@ -68,7 +68,6 @@ export const registerController = async (req, res) => {
 // ---------------------Login controller--------------
 export const loginController = async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
   try {
     // Check for email and password
     if (!email || !password) {

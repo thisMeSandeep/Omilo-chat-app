@@ -43,7 +43,7 @@ const Setting = () => {
         <div className="size-24 rounded-full mx-auto">
           <label htmlFor="profile" className="size-full rounded-full cursor-pointer">
             <div className="relative">
-              <img src={user.profilePic} alt="profile" className="size-24 rounded-full object-cover" />
+              <img src={user?.profilePic} alt="profile" className="size-24 rounded-full object-cover" />
               <div className="absolute bottom-2 right-0 rounded-full bg-gray-200 dark:bg-gray-800 p-2 z-10">
                 <Pencil className="size-4 text-omilo-text-primary dark:text-white " />
               </div>
