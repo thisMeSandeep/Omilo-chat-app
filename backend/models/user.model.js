@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
       minlength: 3,
       maxlength: 30,
+      index: true, 
     },
     email: {
       type: String,
@@ -17,6 +18,7 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      index: true, 
     },
     password: {
       type: String,
@@ -34,6 +36,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "https://cdn-icons-png.flaticon.com/512/10337/10337609.png",
       trim: true,
+    },
+    profilePicPublicId: {
+      type: String,
+      default: null,
     },
     gender: {
       type: String,
@@ -62,6 +68,7 @@ const userSchema = new mongoose.Schema(
     online: {
       type: Boolean,
       default: false,
+      index: true, 
     },
     lastSeen: {
       type: Date,
@@ -75,27 +82,41 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["active", "inactive", "banned"],
       default: "active",
+      index: true,
     },
     privateAccount: {
       type: Boolean,
       default: false,
     },
+    // Keep ObjectId references - better than strings
     friends: [
       {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
       },
     ],
     blockedUsers: [
       {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
       },
     ],
   },
   {
     timestamps: true,
+  // removes password from JSON responses
+    toJSON: {
+      transform: function(doc, ret) {
+        delete ret.password;
+        return ret;
+      },
+    },
   }
 );
 
-const User = mongoose.models.user || mongoose.model("User", userSchema);
+// Keep only essential compound index
+userSchema.index({ status: 1, online: 1 });
+
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
